@@ -1,13 +1,12 @@
 Feature: Create Token Caller
 
   Background:
-    Given url 'https://restful-booker.herokuapp.com'
+    Given url baseUrl
     And path 'auth'
-    And header Content-Type = 'application/json'
 
-    Scenario: Create Token
-      * def requestBody = {"username" : "admin", "password" : "password123"}
-      And request requestBody
-      When method post
-      Then status 200
-      * print response
+  @create_token_caller
+  Scenario: Create Token
+    * def requestBody = {"username" : "admin", "password" : "password123"}
+    And request requestBody
+    When method post
+    Then status 200
