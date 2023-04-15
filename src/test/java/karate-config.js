@@ -6,13 +6,12 @@ function fn() {
   }
   var config = {
     env: env,
-    myVarName: 'someValue'
+    myVarName: 'someValue',
+    baseUrl: 'https://restful-booker.herokuapp.com'
   }
-  if (env == 'dev') {
-    // customize
-    // e.g. config.foo = 'bar';
-  } else if (env == 'e2e') {
-    // customize
-  }
+  var generalTokenResult = karate.callSingle('classpath:caller/generateToken/createTokenCaller.feature@create_token_caller',config);
+  config.generalToken = generalTokenResult.response.token;
+  karate.configure('headers',{'Content-Type':'application/json'})
+
   return config;
 }
